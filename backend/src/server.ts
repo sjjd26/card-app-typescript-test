@@ -30,6 +30,9 @@ server.post<{ Body: Entry }>("/create/", async (req, reply) => {
   newEntryBody.created_at
     ? (newEntryBody.created_at = new Date(req.body.created_at))
     : (newEntryBody.created_at = new Date());
+  newEntryBody.scheduled_for
+    ? (newEntryBody.scheduled_for = new Date(req.body.scheduled_for))
+    : (newEntryBody.scheduled_for = new Date());
   try {
     const createdEntryData = await Prisma.entry.create({ data: req.body });
     reply.send(createdEntryData);
@@ -54,6 +57,9 @@ server.put<{ Params: { id: string }; Body: Entry }>(
     updatedEntryBody.created_at
       ? (updatedEntryBody.created_at = new Date(req.body.created_at))
       : (updatedEntryBody.created_at = new Date());
+    updatedEntryBody.scheduled_for
+      ? (updatedEntryBody.scheduled_for = new Date(req.body.scheduled_for))
+      : (updatedEntryBody.scheduled_for = new Date());
     try {
       await Prisma.entry.update({
         data: req.body,
