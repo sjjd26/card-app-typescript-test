@@ -8,7 +8,7 @@ export default function AllEntries() {
   let navigate = useNavigate();
   if (entries.length == 0) {
     return (
-      <section>
+      <section className="dark:text-white">
         <h1 className="text-center font-semibold text-2xl m-5">You don't have any card</h1>
         <p className="text-center font-medium text-md">
           Lets{" "}
