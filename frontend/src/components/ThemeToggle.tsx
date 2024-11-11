@@ -1,11 +1,11 @@
-export default function ThemeToggle(){
+export default function ThemeToggle() {
   const onClickToggle = () => {
-    document.documentElement.classList.toggle('dark');
-  }
+    document.documentElement.classList.toggle("dark");
+  };
 
-  return(
+  return (
     <button className="p-4 bg-gray-300 hover:bg-gray-400 text-xl font-medium rounded-md" onClick={onClickToggle}>
       Toggle dark mode
     </button>
-  )
+  );
 }
