@@ -1,5 +1,5 @@
-import { server } from "../src/server"
 import Prisma from "../src/db";
+import { server } from "../src/server";
 
 const createTestEntry = async () => {
   return await Prisma.entry.create({
@@ -19,7 +19,7 @@ const deleteTestEntry = async (id: string) => {
         id: id,
       },
     });
-  };
+  }
 };
 
 describe("server test", () => {
@@ -27,7 +27,6 @@ describe("server test", () => {
     expect(1 + 1).toEqual(2);
   });
 });
-
 
 test("GET /get", async () => {
   const response = await server.inject({
@@ -38,8 +37,7 @@ test("GET /get", async () => {
   expect(response.statusCode).toBe(200);
 });
 
-
-test ("GET /get/:id", async () => {
+test("GET /get/:id", async () => {
   const createdEntry = await createTestEntry();
 
   let response = await server.inject({
@@ -67,7 +65,6 @@ test ("GET /get/:id", async () => {
   expect(response.json()).toEqual({ msg: `Error finding entry with id ${createdEntry.id}` });
 });
 
-
 test("POST /create", async () => {
   const currentDate = new Date();
 
@@ -90,7 +87,7 @@ test("POST /create", async () => {
     created_at: expect.any(String),
     scheduled_for: expect.any(String),
   });
-  
+
   const createdEntry = await Prisma.entry.findUnique({
     where: {
       id: response.json().id,
@@ -107,7 +104,6 @@ test("POST /create", async () => {
 
   await deleteTestEntry(response.json().id);
 });
-
 
 test("DELETE /delete/:id", async () => {
   const createdEntry = await createTestEntry();
@@ -138,7 +134,6 @@ test("DELETE /delete/:id", async () => {
   expect(response.statusCode).toBe(500);
   expect(response.json()).toEqual({ msg: "Error deleting entry" });
 });
-
 
 test("PUT /update/:id", async () => {
   const createdEntry = await createTestEntry();
